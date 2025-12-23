@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Membership | KPMH Welfare Association</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <a href="index.html" class="logo">Kenya Private Mision Hospital Welfare Association</a>
+</header>
+
+<section class="form-section">
+  <h2>Membership Application</h2>
+
+  <form id="membershipForm">
+    <input type="text" name="hospital" placeholder="Hospital Name" required>
+    <select name="type" required>
+      <option value="">Hospital Type</option>
+      <option>Private</option>
+      <option>Mission / Faith-Based</option>
+    </select>
+    <input type="text" name="county" placeholder="County" required>
+    <input type="text" name="contact" placeholder="Contact Person">
+    <input type="tel" name="phone" placeholder="Phone Number">
+    <input type="email" name="email" placeholder="Email Address">
+    <button type="submit">Submit Application</button>
+  </form>
+
+  <p id="msg"></p>
+</section>
+
+<script>
+const form = document.getElementById("membershipForm");
+const msg = document.getElementById("msg");
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+
+  const data = Object.fromEntries(new FormData(form));
+
+  fetch("PASTE_YOUR_APPS_SCRIPT_URL_HERE", {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(() => {
+    msg.innerText = "Application submitted successfully!";
+    form.reset();
+  })
+  .catch(() => {
+    msg.innerText = "Submission failed. Try again.";
+  });
+});
+</script>
+
+</body>
+</html>
